@@ -1,24 +1,210 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9mq-9e-zuL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="7iO-Gp-24o">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="9mq-9e-zuL" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EJk-Ua-UyB">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cRs-vU-uKz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6c7-SH-8bB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-658" y="130"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RaceGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svo-F4-8Zf">
+                                <rect key="frame" x="20" y="685" width="374" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedSettingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bTv-f8-l16"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0d-CJ-zoq">
+                                <rect key="frame" x="20" y="611" width="374" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Start a game">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedStartGameButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U2G-NF-e5p"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaV-qQ-hH5">
+                                <rect key="frame" x="20" y="759" width="374" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Scores">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedScoresButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U5K-b2-JOZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="h5l-dT-Ic8"/>
+                    <connections>
+                        <outlet property="scores" destination="XaV-qQ-hH5" id="W31-oE-0my"/>
+                        <outlet property="settings" destination="svo-F4-8Zf" id="Mql-HR-xED"/>
+                        <outlet property="startGame" destination="c0d-CJ-zoq" id="P5j-zG-PAx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
+        </scene>
+        <!--GameViewController-->
+        <scene sceneID="8fx-vx-NcW">
+            <objects>
+                <viewController storyboardIdentifier="GameViewController" id="VIw-CX-mCR" userLabel="GameViewController" customClass="GameViewController" customModule="RaceGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zad-1c-37I" userLabel="baseOffRoadView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBQ-Ll-vxD" userLabel="transparentView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpK-qm-bu5" userLabel="roadView">
+                                        <rect key="frame" x="52" y="0.0" width="310.5" height="896"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-eR-Lza" userLabel="Pause Button">
+                                                <rect key="frame" x="-32" y="52" width="79" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="PAUSE">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pressedPauseButton:" destination="VIw-CX-mCR" eventType="touchUpInside" id="ErO-F8-VSe"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.65449273586273193" green="0.57449585199356079" blue="0.09219331294298172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gpK-qm-bu5" firstAttribute="top" secondItem="ZBQ-Ll-vxD" secondAttribute="top" id="EpM-b0-F0x"/>
+                                    <constraint firstItem="gpK-qm-bu5" firstAttribute="centerX" secondItem="ZBQ-Ll-vxD" secondAttribute="centerX" id="FBp-ZO-xSw"/>
+                                    <constraint firstItem="gpK-qm-bu5" firstAttribute="height" secondItem="ZBQ-Ll-vxD" secondAttribute="height" id="O4G-Q4-egZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="gpK-qm-bu5" secondAttribute="bottom" id="Oeg-9V-sLg"/>
+                                    <constraint firstItem="gpK-qm-bu5" firstAttribute="centerY" secondItem="ZBQ-Ll-vxD" secondAttribute="centerY" id="daM-if-lVn"/>
+                                    <constraint firstItem="gpK-qm-bu5" firstAttribute="width" secondItem="ZBQ-Ll-vxD" secondAttribute="width" multiplier="0.75" id="kNZ-SQ-VpZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.60346251726150513" green="0.73942571878433228" blue="0.085031323134899139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZBQ-Ll-vxD" firstAttribute="centerX" secondItem="zad-1c-37I" secondAttribute="centerX" id="0sS-Kf-Djg"/>
+                            <constraint firstItem="ZBQ-Ll-vxD" firstAttribute="top" secondItem="zad-1c-37I" secondAttribute="top" id="NlM-GU-885"/>
+                            <constraint firstItem="ZBQ-Ll-vxD" firstAttribute="trailing" secondItem="vMd-0q-gzR" secondAttribute="trailing" id="NxJ-fC-79g"/>
+                            <constraint firstAttribute="bottom" secondItem="ZBQ-Ll-vxD" secondAttribute="bottom" id="Rm2-AG-Sbi"/>
+                            <constraint firstItem="ZBQ-Ll-vxD" firstAttribute="leading" secondItem="vMd-0q-gzR" secondAttribute="leading" id="y1B-Eo-33M"/>
+                            <constraint firstItem="ZBQ-Ll-vxD" firstAttribute="centerY" secondItem="zad-1c-37I" secondAttribute="centerY" id="zW3-jq-1DL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vMd-0q-gzR"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="2ab-eR-Lza" id="fnw-fY-22L"/>
+                        <outlet property="roadViewOutlet" destination="gpK-qm-bu5" id="k4C-ZT-rSN"/>
+                        <outlet property="transparentViewOutlet" destination="ZBQ-Ll-vxD" id="yvT-JJ-oHz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0l7-sz-Q4K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="818.84057971014499" y="127.90178571428571"/>
+        </scene>
+        <!--SettingsViewController-->
+        <scene sceneID="Dem-21-OTz">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="xRW-jx-aWv" userLabel="SettingsViewController" customClass="SettingsViewController" customModule="RaceGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iSx-Z9-Oeu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4z-XP-aYE">
+                                <rect key="frame" x="19" y="105" width="52" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedSettingsButton:" destination="xRW-jx-aWv" eventType="touchUpInside" id="YEm-En-VRX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="uhZ-WZ-kH6"/>
+                    </view>
+                    <connections>
+                        <outlet property="settingsButton" destination="B4z-XP-aYE" id="BkO-EI-H7q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yQR-0C-QW7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1487" y="130"/>
+        </scene>
+        <!--ScoresViewController-->
+        <scene sceneID="YTr-uD-FnN">
+            <objects>
+                <viewController storyboardIdentifier="ScoresViewController" id="4pp-rT-kIm" userLabel="ScoresViewController" customClass="ScoresViewController" customModule="RaceGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0AB-df-J51">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwJ-8y-nSi">
+                                <rect key="frame" x="19" y="101" width="52" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedBackButton:" destination="4pp-rT-kIm" eventType="touchUpInside" id="14M-Al-96f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="8xA-To-owE"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="gwJ-8y-nSi" id="rxe-iS-p9o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="txI-qN-l8E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2117" y="132"/>
         </scene>
     </scenes>
 </document>
