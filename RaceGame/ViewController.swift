@@ -18,23 +18,36 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        startGame.setRadiusWithShadow(30)
+        settings.setRadiusWithShadow(30)
+        scores.setRadiusWithShadow(30)
+    }
     @IBAction func pressedStartGameButton(_ sender: UIButton) {
         
-        let startGameController = self.storyboard?.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
+        guard let startGameController = self.storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
+            return
+        }
         
 //        self.present(startGameController, animated: true, completion: nil)
         self.navigationController?.pushViewController(startGameController, animated: true)
     }
     @IBAction func pressedSettingsButton(_ sender: UIButton) {
         
-        let settingsController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        guard let settingsController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else {
+            return
+        }
         
 //        self.present(settingsController, animated: true, completion: nil)
         self.navigationController?.pushViewController(settingsController, animated: true)
     }
     @IBAction func pressedScoresButton(_ sender: UIButton) {
         
-        let scoresController = self.storyboard?.instantiateViewController(withIdentifier: "ScoresViewController") as! ScoresViewController
+        guard let scoresController = self.storyboard?.instantiateViewController(withIdentifier: "ScoresViewController") as? ScoresViewController else {
+            return
+        }
         
         self.navigationController?.pushViewController(scoresController, animated: true)
     }
@@ -42,3 +55,14 @@ class ViewController: UIViewController {
 
 }
 
+extension UIView{
+    
+    func setRadiusWithShadow(_ radius: CGFloat? = nil) {
+        layer.cornerRadius = radius ?? self.frame.width / 2
+        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowOffset = CGSize(width: 5.0, height: 2)
+        layer.shadowRadius = 1.0
+        layer.shadowOpacity = 0.7
+        layer.masksToBounds = false
+    }
+}

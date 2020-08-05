@@ -11,7 +11,8 @@ import UIKit
 
 class Images {
     
-    static let porsche = UIImage(named: "porshe_car")
+    static let grey_car = UIImage(named: "grey_car")
     static let yellow_car = UIImage(named: "yellow_car")
+    
     
 }

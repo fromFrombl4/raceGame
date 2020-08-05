@@ -86,7 +86,7 @@
         <scene sceneID="8fx-vx-NcW">
             <objects>
                 <viewController storyboardIdentifier="GameViewController" id="VIw-CX-mCR" userLabel="GameViewController" customClass="GameViewController" customModule="RaceGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zad-1c-37I" userLabel="baseOffRoadView">
+                    <view key="view" contentMode="scaleToFill" id="zad-1c-37I" userLabel="view">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -147,6 +147,7 @@
                     <connections>
                         <outlet property="backButton" destination="2ab-eR-Lza" id="fnw-fY-22L"/>
                         <outlet property="carImageView" destination="Mx7-DH-voh" id="iva-L9-HRs"/>
+                        <outlet property="carLeadingConstraint" destination="Pxo-BI-9Gy" id="WbG-qs-S15"/>
                         <outlet property="roadViewOutlet" destination="gpK-qm-bu5" id="k4C-ZT-rSN"/>
                         <outlet property="transparentViewOutlet" destination="ZBQ-Ll-vxD" id="yvT-JJ-oHz"/>
                     </connections>

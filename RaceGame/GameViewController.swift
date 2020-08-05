@@ -10,22 +10,28 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    @IBOutlet weak var carLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var carImageView: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var roadViewOutlet: UIView!
     @IBOutlet weak var transparentViewOutlet: UIView!
-//    var carImageView: UIImageView?
+    var treeImageView: UIImageView?
+    var enemyImageView: UIImageView?
     let lineViewWidth: CGFloat = 20
     let lineViewHeight: CGFloat = 80
     let x = 0
     let y = 0
+    let treeWidth = 10
+    
     //    let lineView = UIView()?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         locateCar()
+        locateCar()
+        
+        carLeadingConstraint.constant = 50
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,13 +43,11 @@ class GameViewController: UIViewController {
         timer.fire()
         
         
-        let tapLeft = UITapGestureRecognizer(target: self, action: #selector(handleLeftTap))
-        tapLeft.numberOfTapsRequired = 1
-        tapLeft.numberOfTouchesRequired = 1
+        let panRec = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        view.addGestureRecognizer(panRec)
         
-        let tapRight = UITapGestureRecognizer(target: self, action: #selector(handleRightTap))
-        tapRight.numberOfTouchesRequired = 1
-        tapRight.numberOfTapsRequired = 1
+        
+        
     }
     @IBAction func pressedPauseButton(_ sender: UIButton) {
         
@@ -60,7 +64,7 @@ class GameViewController: UIViewController {
         
         let lineView = UIView(frame: CGRect(x: lineViewCenterX, y: CGFloat(y), width: self.lineViewWidth, height: self.lineViewHeight))
         lineView.backgroundColor = .white
-        roadViewOutlet.addSubview(lineView)
+        roadViewOutlet.insertSubview(lineView, at: 0)
         
         self.viewAnimate(someView: lineView, x: lineViewCenterX, y: yHeight)
         
@@ -69,61 +73,59 @@ class GameViewController: UIViewController {
     
     
     private func viewAnimate (someView: UIView, x: CGFloat, y: CGFloat){
-       
-            UIView.animate(withDuration: 1, animations: {
-                someView.layer.position = CGPoint(x: x, y: y)
-            }) {(_) in
-            }
+        
+        UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
+            someView.layer.position = CGPoint(x: x, y: y)
+        }) {(_) in
+        }
     }
     
     func locateCar() {
         guard let centerImage: CGPoint = carImageView.center else {
             return
         }
-//        guard var imageView = carImageView else {
-//            return
-//        }
         
-//        let lineViewCenterX:CGFloat = roadViewOutlet.frame.size.width / 2 - CGFloat(lineViewWidth)/2
-//        let yHeight = UIScreen.main.bounds.height - imageViewGuard.bounds.height
+        //        let lineViewCenterX:CGFloat = roadViewOutlet.frame.size.width / 2 - CGFloat(lineViewWidth)/2
+        //        let yHeight = UIScreen.main.bounds.height - imageViewGuard.bounds.height
+        //
+        
+//        let frame = carImageView.bounds
+        
+//        let imageView = UIImageView(frame: frame)
+//        imageView.contentMode = .scaleAspectFit
+////        imageView.backgroundColor = .clear
+        carImageView.image = Images.grey_car
+        carImageView.backgroundColor = .clear
+        carImageView.isOpaque = false
 //
-//        imageView = UIImageView(frame: CGRect(x: 0, y: 400, width: 400, height: 400))
-        let frame = carImageView.bounds
+//        let center = centerImage
+//        imageView.center = center
         
-        let imageView = UIImageView(frame: frame)
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .none
-        imageView.image = Images.yellow_car
         
-        let center = centerImage
-        imageView.center = center
-//        carImageView = UIImageView(frame: CGRect(x: 400/*lineViewCenterX*/, y: 400/*yHeight*/, width: roadViewOutlet.bounds.width / 2, height: imageViewGuard.bounds.height))
+        //        carImageView = UIImageView(frame: CGRect(x: 400/*lineViewCenterX*/, y: 400/*yHeight*/, width: roadViewOutlet.bounds.width / 2, height: imageViewGuard.bounds.height))
         
-//        carImageView?.image = UIImage(named: car)
+        //        carImageView?.image = UIImage(named: car)
+        
+//        self.roadViewOutlet.addSubview(carImageView)
+        
+    }
+    
+    
+    
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+   
+        if gesture.state == .began || gesture.state == .changed {
 
-        self.roadViewOutlet.addSubview(imageView)
-        
+            let translation = gesture.translation(in: self.view)
+            print(carLeadingConstraint.constant)
+            carLeadingConstraint.constant = translation.x
+//            print(translation.x)
+
+        }
     }
     
-    func moveCarToLeft() {
-        
-    }
     
-    @objc func handleLeftTap(_ sender: UITapGestureRecognizer) {
-        UIImageView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-            self.carImageView.layer.position = CGPoint(x: 0, y: UIScreen.main.bounds.height - self.carImageView.bounds.height)
-        })
-    }
-    
-    @objc func handleRightTap(_ sender: UITapGestureRecognizer) {
-        UIImageView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-            self.carImageView.layer.position = CGPoint(x: UIScreen.main.bounds.width - self.carImageView.bounds.width, y: UIScreen.main.bounds.height - self.carImageView.bounds.height)
-        })
-    }
-    
-    func moveCarToRight(){
-        
-    }
+   
     
     func nukeAllAnimations() {
         roadViewOutlet.subviews.forEach({$0.layer.removeAllAnimations()})
@@ -132,4 +134,36 @@ class GameViewController: UIViewController {
     }
     
     
+    func addTree(){
+        
+        guard var imageView = treeImageView else {
+            return
+        }
+        
+        //        let lineViewCenterX:CGFloat = roadViewOutlet.frame.size.width / 2 - CGFloat(lineViewWidth)/2
+        //        let yHeight = UIScreen.main.bounds.height - imageViewGuard.bounds.height
+        //
+        
+        
+        
+        //                 imageView = UIImageView(frame: CGRect(x: , y: , width: <#T##CGFloat#>, height: <#T##CGFloat#>))
+        imageView.contentMode = .scaleAspectFit
+        imageView.isOpaque = false
+        imageView.image = Images.yellow_car
+        
+        
+        //        carImageView = UIImageView(frame: CGRect(x: 400/*lineViewCenterX*/, y: 400/*yHeight*/, width: roadViewOutlet.bounds.width / 2, height: imageViewGuard.bounds.height))
+        
+        //        carImageView?.image = UIImage(named: car)
+        
+        self.roadViewOutlet.addSubview(imageView)
+        
+        
+    }
+    
+    func addEnemy(){
+        
+    }
+    
 }
+
