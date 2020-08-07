@@ -30,8 +30,10 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         locateCar()
-        
         carLeadingConstraint.constant = 50
+        
+        addEnemy()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,22 +41,21 @@ class GameViewController: UIViewController {
         let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in
             self.roadLineView()
         })
-        
         timer.fire()
-        
-        
+  
         let panRec = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(panRec)
         
-        
+//        let enemyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in
+//            self.addEnemy()
+//        })
+//        enemyTimer.fire()
         
     }
     @IBAction func pressedPauseButton(_ sender: UIButton) {
         
         //        self.navigationController?.popViewController(animated: true)
-        
-        
-        
+
     }
     
     private func roadLineView() {
@@ -66,24 +67,27 @@ class GameViewController: UIViewController {
         lineView.backgroundColor = .white
         roadViewOutlet.insertSubview(lineView, at: 0)
         
-        self.viewAnimate(someView: lineView, x: lineViewCenterX, y: yHeight)
+        self.viewAnimate(someView: lineView)
         
     }
     
     
     
-    private func viewAnimate (someView: UIView, x: CGFloat, y: CGFloat){
+    private func viewAnimate (someView: UIView){
         
         UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-            someView.layer.position = CGPoint(x: x, y: y)
+//            someView.layer.position = CGPoint(x: x, y: y)
+            someView.frame.origin.y += 1000
         }) {(_) in
+            
+            someView.removeFromSuperview()
         }
     }
     
     func locateCar() {
-        guard let centerImage: CGPoint = carImageView.center else {
-            return
-        }
+//        guard let centerImage: CGPoint = carImageView.center else {
+//            return
+//        }
         
         //        let lineViewCenterX:CGFloat = roadViewOutlet.frame.size.width / 2 - CGFloat(lineViewWidth)/2
         //        let yHeight = UIScreen.main.bounds.height - imageViewGuard.bounds.height
@@ -94,6 +98,8 @@ class GameViewController: UIViewController {
 //        let imageView = UIImageView(frame: frame)
 //        imageView.contentMode = .scaleAspectFit
 ////        imageView.backgroundColor = .clear
+        
+        
         carImageView.image = Images.grey_car
         carImageView.backgroundColor = .clear
         carImageView.isOpaque = false
@@ -136,7 +142,7 @@ class GameViewController: UIViewController {
     
     func addTree(){
         
-        guard var imageView = treeImageView else {
+        guard let imageView = treeImageView else {
             return
         }
         
@@ -161,7 +167,20 @@ class GameViewController: UIViewController {
         
     }
     
-    func addEnemy(){
+    func addEnemy() {
+//        let lineViewCenterX:CGFloat = roadViewOutlet.frame.size.width / 2 - CGFloat(lineViewWidth)/2
+//        let yHeight = UIScreen.main.bounds.height + lineViewHeight
+        
+        let imageViewWidth = roadViewOutlet.frame.size.width - CGFloat(lineViewWidth)
+        let imageViewHeight = roadViewOutlet.frame.size.height * 0.2
+        
+        if var enemy = enemyImageView  {
+            enemy = UIImageView(frame: CGRect(x: 400, y: 200, width: imageViewWidth, height: imageViewHeight))
+            enemy.image = Images.yellow_car
+            enemy.contentMode = .scaleAspectFit
+//            self.viewAnimate(someView: enemy)
+            roadViewOutlet.addSubview(enemy)
+        }
         
     }
     
