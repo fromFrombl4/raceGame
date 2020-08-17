@@ -13,6 +13,10 @@ class Images {
     
     static let grey_car = UIImage(named: "grey_car")
     static let yellow_car = UIImage(named: "yellow_car")
+    static let mercedes = UIImage(named: "mercedes")
+    static let police = UIImage(named: "police")
+    
+    
     
     
 }

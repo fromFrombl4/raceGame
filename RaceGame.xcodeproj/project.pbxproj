@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5950CC3324DFFE42003AA422 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950CC3224DFFE42003AA422 /* LaunchScreenViewController.swift */; };
+		5950CC3524DFFEBF003AA422 /* GreatVibes-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5950CC3424DFFEBF003AA422 /* GreatVibes-Regular.otf */; };
 		597B90F924C5F19200CDDF0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597B90F824C5F19200CDDF0B /* AppDelegate.swift */; };
 		597B90FB24C5F19200CDDF0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597B90FA24C5F19200CDDF0B /* SceneDelegate.swift */; };
 		597B90FD24C5F19200CDDF0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597B90FC24C5F19200CDDF0B /* ViewController.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5950CC3224DFFE42003AA422 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		5950CC3424DFFEBF003AA422 /* GreatVibes-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GreatVibes-Regular.otf"; sourceTree = "<group>"; };
 		597B90F524C5F19200CDDF0B /* RaceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		597B90F824C5F19200CDDF0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		597B90FA24C5F19200CDDF0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,7 @@
 		597B90F724C5F19200CDDF0B /* RaceGame */ = {
 			isa = PBXGroup;
 			children = (
+				5950CC3424DFFEBF003AA422 /* GreatVibes-Regular.otf */,
 				597B90F824C5F19200CDDF0B /* AppDelegate.swift */,
 				597B90FA24C5F19200CDDF0B /* SceneDelegate.swift */,
 				597B90FC24C5F19200CDDF0B /* ViewController.swift */,
@@ -74,6 +79,7 @@
 				597B910124C5F19700CDDF0B /* Assets.xcassets */,
 				59EB6FE224D62A220034B463 /* Images.swift */,
 				597B910324C5F19700CDDF0B /* LaunchScreen.storyboard */,
+				5950CC3224DFFE42003AA422 /* LaunchScreenViewController.swift */,
 				597B910624C5F19700CDDF0B /* Info.plist */,
 			);
 			path = RaceGame;
@@ -137,6 +143,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5950CC3524DFFEBF003AA422 /* GreatVibes-Regular.otf in Resources */,
 				597B910524C5F19700CDDF0B /* LaunchScreen.storyboard in Resources */,
 				597B910224C5F19700CDDF0B /* Assets.xcassets in Resources */,
 				597B910024C5F19200CDDF0B /* Main.storyboard in Resources */,
@@ -152,6 +159,7 @@
 			files = (
 				59EB6FE324D62A220034B463 /* Images.swift in Sources */,
 				597B910F24C5F20B00CDDF0B /* GameViewController.swift in Sources */,
+				5950CC3324DFFE42003AA422 /* LaunchScreenViewController.swift in Sources */,
 				597B913324C645ED00CDDF0B /* ScoresViewController.swift in Sources */,
 				597B90FD24C5F19200CDDF0B /* ViewController.swift in Sources */,
 				597B90F924C5F19200CDDF0B /* AppDelegate.swift in Sources */,

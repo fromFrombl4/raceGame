@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var startGameLabel: UILabel!
     @IBOutlet weak var startGame: UIButton!
     @IBOutlet weak var settings: UIButton!
     @IBOutlet weak var scores: UIButton!
@@ -17,6 +18,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+//        let fonr = UIFont(name: <#T##String#>, size: <#T##CGFloat#>)
     }
     
     override func viewWillAppear(_ animated: Bool) {
