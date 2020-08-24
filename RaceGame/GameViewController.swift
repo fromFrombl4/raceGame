@@ -25,6 +25,8 @@ class GameViewController: UIViewController {
     let y = 0
     let treeWidth = 10
     var scores = 0
+    var time: TimeInterval = 0.0
+    var initialInterval: TimeInterval!
     
     
     //    let lineView = UIView()?
@@ -45,41 +47,54 @@ class GameViewController: UIViewController {
         addScoresLabel()
         
         
-//        enemyImageView = UIImageView(frame: CGRect(x: 200, y: 100, width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height * 0.2))
-//        enemyImageView.image = Images.yellow_car
-//        roadViewOutlet.addSubview(enemyImageView)
-        
-       
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true, block: {_ in
-            self.roadLineView()
-        })
-        timer.fire()
+        initialInterval = Date.timeIntervalSinceReferenceDate
+        
+//        let timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true, block: {_ in
+//            self.roadLineView()
+//        })
+//        timer.fire()
   
         let panRec = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(panRec)
         
-        let enemyTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: {_ in
-            self.addEnemy()
-        })
-        enemyTimer.fire()
+//        self.addEnemy()
         
-        let instersectsTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: {_ in
-            self.calculateIntersects(self.carImageView, self.enemyImageView)
-        })
-        instersectsTimer.fire()
+        let tikTimer = Timer.scheduledTimer(timeInterval: 0.016, target: self, selector: #selector(tik), userInfo: nil, repeats: true)
+//            self.enemyImageView.frame.origin.y += 100
+        tikTimer.fire()
+//
+//        let instersectsTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: {_ in
+//            self.calculateIntersects(self.carImageView, self.enemyImageView)
+//        })
+//        instersectsTimer.fire()
+        
+        
+        
         
     }
     
-   
+       
     @IBAction func pressedPauseButton(_ sender: UIButton) {
         
         //        self.navigationController?.popViewController(animated: true)
 
+    }
+    
+    func roadTik(){
+        
+    }
+    
+    func animateEnemy(){
+        
+    }
+    
+    func intersectEnemy(){
+        
     }
     
     private func roadLineView() {
@@ -121,18 +136,12 @@ class GameViewController: UIViewController {
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
    
         if gesture.state == .began || gesture.state == .changed {
-
             let translation = gesture.translation(in: self.view)
-            print(carLeadingConstraint.constant)
+//            print(carLeadingConstraint.constant)
             carLeadingConstraint.constant = translation.x
-            
-            
+        
 
         }
-
-//        if carImageView.frame.origin.x <= 0 || carImageView.frame.origin.x >= roadViewOutlet.frame.origin.x{
-//            nukeAllAnimations()
-//        }
     }
     
     
@@ -171,7 +180,7 @@ class GameViewController: UIViewController {
         enemyImageView.image = Images.police
         enemyImageView.transform = enemyImageView.transform.rotated(by: .pi * 1.5)
             enemyImageView.contentMode = .scaleAspectFit
-            self.viewAnimate(someView: enemyImageView)
+//            self.viewAnimate(someView: enemyImageView)
             roadViewOutlet.insertSubview(enemyImageView, at: 1)
         
     }
@@ -181,6 +190,7 @@ class GameViewController: UIViewController {
         if carImageView.frame.intersects(enemyImageView.frame){
             self.nukeAllAnimations()
         }
+        print("\(enemyImageView.frame)" + "&" + "\(carImageView.frame)")
     }
     
     func addScoresLabel(){
@@ -199,6 +209,14 @@ class GameViewController: UIViewController {
         
         
     }
+    
+    @objc func tik(){
+        let tikTimer = Timer.scheduledTimer(timeInterval: 0.016, target: self, selector: #selector(tik), userInfo: nil, repeats: true)
+        
+        print(Date.timeIntervalSinceReferenceDate - initialInterval)
+    }
+    
+    
     
 }
 
