@@ -10,11 +10,23 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-
+    
+    private enum Direction {
+        case right
+        case left
+    }
+        
+    
     private enum RoadConstants {
         static let roadCycle: TimeInterval = 2
         static let lineWidth: CGFloat = 20
         static let lineHeight: CGFloat = 80
+    }
+    
+    private enum ConeConstants {
+        static let coneCycle: TimeInterval = 2
+        static let coneWidth: CGFloat = 20
+        static let coneHeight: CGFloat = 80
     }
     
     @IBOutlet weak var carLeadingConstraint: NSLayoutConstraint!
@@ -22,26 +34,26 @@ class GameViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var roadViewOutlet: UIView!
     @IBOutlet weak var transparentViewOutlet: UIView!
-
+    
     var roadLineView: UIView!
     var roadAnimatedCount = 0
     var roadDistance: CGFloat = 0.0
     var roadVelocity: CGFloat = 0.0
-
+    
     var treeImageView = UIImageView()
     var enemyImageView = UIImageView()
     var scoresLabel = UILabel()
-
+    
     let x = 0
     let y = 0
     let treeWidth = 10
     var scores = 0
-
+    
     var time: TimeInterval = 0.0
     var initialInterval: TimeInterval!
-
-
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +67,7 @@ class GameViewController: UIViewController {
         locateCar()
         carLeadingConstraint.constant = 50
         addScoresLabel()
-
+        
         createRoadView()
     }
     
@@ -64,61 +76,78 @@ class GameViewController: UIViewController {
         
         initialInterval = Date.timeIntervalSinceReferenceDate
         
-//        let timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true, block: {_ in
-//            self.roadLineView()
-//        })
-//        timer.fire()
-  
-        let panRec = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        view.addGestureRecognizer(panRec)
+        //        let timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true, block: {_ in
+        //            self.roadLineView()
+        //        })
+        //        timer.fire()
         
-//        self.addEnemy()
+//        let panRec = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+//        view.addGestureRecognizer(panRec)
+        
+        let swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
+        swipeLeftRecognizer.direction = .left
+        roadViewOutlet.addGestureRecognizer(swipeLeftRecognizer)
+        
+        let swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleRightSwipe(_:)))
+        swipeRightRecognizer.direction = .right
+        roadViewOutlet.addGestureRecognizer(swipeRightRecognizer)
+        
+        //        self.addEnemy()
         
         let tikTimer = Timer.scheduledTimer(timeInterval: 1.0/120.0, target: self, selector: #selector(tik), userInfo: nil, repeats: true)
-//            self.enemyImageView.frame.origin.y += 100
+        //            self.enemyImageView.frame.origin.y += 100
         tikTimer.fire()
-//
-//        let instersectsTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: {_ in
-//            self.calculateIntersects(self.carImageView, self.enemyImageView)
-//        })
-//        instersectsTimer.fire()
-
+        //
+        //        let instersectsTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: {_ in
+        //            self.calculateIntersects(self.carImageView, self.enemyImageView)
+        //        })
+        //        instersectsTimer.fire()
+        
         calculateValues()
     }
-
+    
     private func calculateValues() {
         roadDistance = view.bounds.height + RoadConstants.lineHeight
         roadVelocity = roadDistance / CGFloat(RoadConstants.roadCycle)
     }
-       
+    
     @IBAction func pressedPauseButton(_ sender: UIButton) {
         
         //        self.navigationController?.popViewController(animated: true)
-
+        
     }
-
+    
     fileprivate func createRoadView() {
-        roadLineView = UIView(frame: CGRect(x: view.center.x,
+        roadLineView = UIView(frame: CGRect(x: view.center.x - 3 * RoadConstants.lineWidth,
                                             y: 0 - RoadConstants.lineHeight,
                                             width: RoadConstants.lineWidth,
                                             height: RoadConstants.lineHeight))
         roadLineView.backgroundColor = .white
         roadViewOutlet.insertSubview(roadLineView, at: 0)
     }
-
+    
     private func moveRoadViewToTop() {
         roadLineView.frame.origin.y = -RoadConstants.lineHeight
     }
-
+    
     private func updateRoadView(_ time: TimeInterval) {
         let relativeTime = time - TimeInterval(roadAnimatedCount) * RoadConstants.roadCycle
         roadLineView.frame.origin.y = roadVelocity * CGFloat(relativeTime) - RoadConstants.lineHeight
     }
-
+    
+//    private func updateConeView(_ time: TimeInterval) {
+//        let relativeTime = time - TimeInterval(roadAnimatedCount) * RoadConstants.roadCycle
+//        roadLineView.frame.origin.y = roadVelocity * CGFloat(relativeTime) - RoadConstants.lineHeight
+//    }
+    
+    //    private func updateEnemyView(_ time: TimeInterval) {
+    //        let relativeTime = time - TimeInterval(
+    //    }
+    
     private func viewAnimate (someView: UIView){
         
         UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-//            someView.layer.position = CGPoint(x: x, y: y)
+            //            someView.layer.position = CGPoint(x: x, y: y)
             someView.frame.origin.y += 1000
         }) {(_) in
             
@@ -135,20 +164,36 @@ class GameViewController: UIViewController {
     }
     
     
+//
+//    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+//        if gesture.state == .began || gesture.state == .changed {
+//            let translation = gesture.translation(in: self.view)
+//            //            print(carLeadingConstraint.constant)
+//            carLeadingConstraint.constant = translation.x
+//        }
+//    }
     
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-   
-        if gesture.state == .began || gesture.state == .changed {
-            let translation = gesture.translation(in: self.view)
-//            print(carLeadingConstraint.constant)
-            carLeadingConstraint.constant = translation.x
+    @objc func handleLeftSwipe(_ gesture: UISwipeGestureRecognizer) {
         
+        carLeadingConstraint.constant -= 50
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.view.layoutIfNeeded()
+        }) { (_) in
+        }
+    }
+    @objc func handleRightSwipe(_ gesture: UISwipeGestureRecognizer) {
 
+        carLeadingConstraint.constant += 50
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.view.layoutIfNeeded()
+        }) { (_) in
         }
     }
     
     
-   
+    
     
     func nukeAllAnimations() {
         roadViewOutlet.subviews.forEach({$0.layer.removeAllAnimations()})
@@ -175,18 +220,19 @@ class GameViewController: UIViewController {
         
     }
     
-//    func addEnemy() {
-//        let imageViewWidth = roadViewOutlet.frame.size.width - CGFloat(lineViewWidth)
-//        let imageViewHeight = roadViewOutlet.frame.size.height * 0.15
-//
-//        enemyImageView = UIImageView(frame: CGRect(x: 100, y: 20, width: imageViewWidth, height: imageViewHeight))
-//        enemyImageView.image = Images.police
+    func addEnemy() {
+        let imageViewWidth = roadViewOutlet.frame.size.width * 0.2
+        let imageViewHeight = roadViewOutlet.frame.size.height * 0.1
+        
+        enemyImageView = UIImageView(frame: CGRect(x: CGFloat.random(in: roadViewOutlet.frame.origin.x ... roadViewOutlet.frame.origin.x - enemyImageView.frame.size.width ), y: 20, width: imageViewWidth, height: imageViewHeight))
+        enemyImageView.image = Images.cone1
 //        enemyImageView.transform = enemyImageView.transform.rotated(by: .pi * 1.5)
-//            enemyImageView.contentMode = .scaleAspectFit
-////            self.viewAnimate(someView: enemyImageView)
-//            roadViewOutlet.insertSubview(enemyImageView, at: 1)
-//
-//    }
+        enemyImageView.contentMode = .scaleAspectFit
+        //            self.viewAnimate(someView: enemyImageView)
+        roadViewOutlet.insertSubview(enemyImageView, at: 1)
+       
+        
+    }
     
     func calculateIntersects(_ carImageView: UIImageView, _ enemyImageView: UIImageView) {
         
@@ -206,51 +252,55 @@ class GameViewController: UIViewController {
         self.scoresLabel.font = font
         self.scoresLabel.textAlignment = .center
         self.scoresLabel.textColor = .white
-        self.scoresLabel.text = "Score \(scores)"
+        self.scoresLabel.text = "Name: \(UserDefaults.standard.value(forKey: "nickName") as! String) Score \(scores)"
         
         roadViewOutlet.addSubview(scoresLabel)
-        
         
     }
     
     @objc func tik() {
         time = Date.timeIntervalSinceReferenceDate - initialInterval
-        print(time)
-
+//        print(time)
+        
         updateRoadView(time)
-
+        
         //0    0         - add road
         //0.016 0        - animate
         //0.032 0        - animate
-
-
+        
         //0.32 / 1      0
-
-
+        
         // 1.00 / 1.5 ?   1           -
         // 1.016 / 1 ?  1
-
+        
         // 2.03 /2      2
-
+        
         let roadCount = Int(time / RoadConstants.roadCycle)
         if roadCount > roadAnimatedCount {
             moveRoadViewToTop()
             roadAnimatedCount += 1
         }
-        print(roadAnimatedCount)
-        print(roadDistance)
-        print(roadVelocity)
+        //        print(roadAnimatedCount)
+        //        print(roadDistance)
+        //        print(roadVelocity)
     }
-
+    
+    
+    func obstructionTik(){
+        
+    }
+    
     func roadTik() {
-
+        
     }
-
+    
+    
+    
     func animateEnemy() {
-
+        
     }
-
+    
     func intersectEnemy() {
-
+        
     }
 }

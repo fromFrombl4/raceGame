@@ -16,6 +16,10 @@ class Images {
     static let mercedes = UIImage(named: "mercedes")
     static let police = UIImage(named: "police")
     
+    static let cone1 = UIImage(named: "cones_1")
+    static let cone2 = UIImage(named: "cones_2")
+    static let tree = UIImage(named: "tree")
+    
     
     
     
