@@ -117,8 +117,7 @@ class SettingsViewController: UIViewController {
     @IBAction func setSpeedActionSlider(_ sender: UISlider) {
     }
     
-    @IBAction func pressedSaveButton(_ sender: UIButton) {
-        
+    @IBAction func pressedSaveButton(_ sender: UIButton) {         
     }
     
     func saveImage(image: UIImage) -> String? {

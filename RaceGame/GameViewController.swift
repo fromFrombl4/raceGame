@@ -92,12 +92,11 @@ class GameViewController: UIViewController {
         swipeRightRecognizer.direction = .right
         roadViewOutlet.addGestureRecognizer(swipeRightRecognizer)
         
-        //        self.addEnemy()
+                self.addEnemy()
         
         let tikTimer = Timer.scheduledTimer(timeInterval: 1.0/120.0, target: self, selector: #selector(tik), userInfo: nil, repeats: true)
-        //            self.enemyImageView.frame.origin.y += 100
         tikTimer.fire()
-        //
+
         //        let instersectsTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: {_ in
         //            self.calculateIntersects(self.carImageView, self.enemyImageView)
         //        })
@@ -133,6 +132,10 @@ class GameViewController: UIViewController {
     private func updateRoadView(_ time: TimeInterval) {
         let relativeTime = time - TimeInterval(roadAnimatedCount) * RoadConstants.roadCycle
         roadLineView.frame.origin.y = roadVelocity * CGFloat(relativeTime) - RoadConstants.lineHeight
+    }
+    
+    private func moveEnemyViewToTop() {
+        enemyImageView.frame.origin.y = -ConeConstants.coneHeight
     }
     
 //    private func updateConeView(_ time: TimeInterval) {
@@ -203,33 +206,21 @@ class GameViewController: UIViewController {
     
     
     func addTree(){
-        
-        //        let lineViewCenterX:CGFloat = roadViewOutlet.frame.size.width / 2 - CGFloat(lineViewWidth)/2
-        //        let yHeight = UIScreen.main.bounds.height - imageViewGuard.bounds.height
-        //
-        
-        
-        
-        //                 treeImageView = UIImageView(frame: CGRect(x: , y: , width: <#T##CGFloat#>, height: <#T##CGFloat#>))
         treeImageView.contentMode = .scaleAspectFit
         treeImageView.isOpaque = false
         treeImageView.image = Images.yellow_car
         
         self.roadViewOutlet.addSubview(treeImageView)
-        
-        
     }
     
     func addEnemy() {
         let imageViewWidth = roadViewOutlet.frame.size.width * 0.2
-        let imageViewHeight = roadViewOutlet.frame.size.height * 0.1
-        
-        enemyImageView = UIImageView(frame: CGRect(x: CGFloat.random(in: roadViewOutlet.frame.origin.x ... roadViewOutlet.frame.origin.x - enemyImageView.frame.size.width ), y: 20, width: imageViewWidth, height: imageViewHeight))
+        let imageViewHeight = roadViewOutlet.frame.size.height * 0.2
+        enemyImageView = UIImageView(frame: CGRect(x: CGFloat.random(in: roadViewOutlet.frame.origin.x ... roadViewOutlet.frame.origin.x - enemyImageView.frame.size.width ), y: 100, width: imageViewWidth, height: imageViewHeight))
         enemyImageView.image = Images.cone1
-//        enemyImageView.transform = enemyImageView.transform.rotated(by: .pi * 1.5)
         enemyImageView.contentMode = .scaleAspectFit
-        //            self.viewAnimate(someView: enemyImageView)
-        roadViewOutlet.insertSubview(enemyImageView, at: 1)
+//        animateEnemy()
+        roadViewOutlet.addSubview(enemyImageView)
        
         
     }
@@ -243,7 +234,7 @@ class GameViewController: UIViewController {
     }
     
     func addScoresLabel(){
-        scoresLabel = UILabel(frame: CGRect(x: 200, y: 50, width: 100, height: 50))
+        scoresLabel = UILabel(frame: CGRect(x: 200, y: 70, width: roadViewOutlet.frame.size.width * 0.5, height: scoresLabel.contentScaleFactor))
         scoresLabel.backgroundColor = .brown
         scoresLabel.layer.borderWidth = 2
         scoresLabel.layer.borderColor = UIColor.black.cgColor
@@ -285,9 +276,19 @@ class GameViewController: UIViewController {
         //        print(roadVelocity)
     }
     
+    private func updateEnemyView(_ time: TimeInterval) {
+        let relativeTime = time - TimeInterval(roadAnimatedCount) * ConeConstants.coneCycle
+        roadLineView.frame.origin.y = roadVelocity * CGFloat(relativeTime) - ConeConstants.coneHeight
+    }
     
     func obstructionTik(){
+        time = Date.timeIntervalSinceReferenceDate - initialInterval
+        updateEnemyView(time)
         
+        let roadCount = Int(time / ConeConstants.coneCycle)
+        if roadCount > roadAnimatedCount {
+            moveRoadViewToTop()
+            roadAnimatedCount += 1
     }
     
     func roadTik() {
@@ -303,4 +304,5 @@ class GameViewController: UIViewController {
     func intersectEnemy() {
         
     }
+}
 }
