@@ -20,6 +20,8 @@ class SettingsViewController: UIViewController {
     var delayAnimation = 0.1
     var carImagesArray = [UIImage]()
     var obstructionImagesArray = [UIImage]()
+    var selectedCarImage = UIImage()
+    var selectedObstructionImage = UIImage()
     var animationInProgress = false
 
     @IBOutlet weak var settingsButton: UIButton!
@@ -107,9 +109,9 @@ class SettingsViewController: UIViewController {
 
         var nextIndex = currentImageIndex - 1
         if nextIndex < 0 {
-            nextIndex = carImagesArray.count - 1
+            nextIndex = obstructionImagesArray.count - 1
         }
-
+        
         animateObstructionImage(imageIndex: nextIndex, direction: Direction.left)
     }
     
@@ -117,7 +119,9 @@ class SettingsViewController: UIViewController {
     @IBAction func setSpeedActionSlider(_ sender: UISlider) {
     }
     
-    @IBAction func pressedSaveButton(_ sender: UIButton) {         
+    @IBAction func pressedSaveButton(_ sender: UIButton) {
+        saveImage(image: selectedObstructionImage)
+        saveImage(image: selectedCarImage)
     }
     
     func saveImage(image: UIImage) -> String? {

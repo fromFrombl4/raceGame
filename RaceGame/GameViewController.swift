@@ -102,6 +102,12 @@ class GameViewController: UIViewController {
         //        })
         //        instersectsTimer.fire()
         
+        let obstructionTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: {
+            _ in
+            
+            self.viewAnimate(someView: self.enemyImageView)
+        })
+        obstructionTimer.fire()
         calculateValues()
     }
     
@@ -149,12 +155,13 @@ class GameViewController: UIViewController {
     
     private func viewAnimate (someView: UIView){
         
-        UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 4, delay: 0, options: .curveLinear, animations: {
             //            someView.layer.position = CGPoint(x: x, y: y)
             someView.frame.origin.y += 1000
         }) {(_) in
             
             someView.removeFromSuperview()
+            self.roadLineView.addSubview(someView)
         }
     }
     
